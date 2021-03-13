@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bar</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@6.5.0/dist/d3.min.js"></script>
+</head>
+<body>
+<svg width="1400" height="600" id="main" class="svg"></svg>
+<script>
+    let data = [{name: 'Shah-Kui', value: 6},
+        {name: 'Wen-Yang', value: 6}, {name: 'Cai Yun', value: 16}, {name: 'Liang Yuan', value: 10},
+        {name: 'Yuan-Chen', value: 6}, {name: 'Rui-Long', value: 10}, {name: 'Dong Xin', value: 12},
+        {name: 'He Yu', value: 20}, {name: 'Xian-Li', value: 12}, {name: 'Goodness', value: 20},
+        {name: 'Wei-Yu', value: 15}, {name: 'Chen Zhang', value: 14},
+        {name: 'Yu Peeing', value: 15}, {name: 'Li Jin', value: 18}];
+    //console.log(data);
+    let svg = d3.select('#main');
+    let width = svg.attr('width');
+    let height = svg.attr('height');
+    let margin = {top: 60, right: 30, bottom: 60, left: 100};
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
+    let xScale = d3.scaleLinear().domain([0, d3.max(data, item => item.value)]).range([0, innerWidth]);
+    let yScale = d3.scaleBand().domain(data.map(item => item.name)).range([0, innerHeight]).padding(0.1);
+
+    let g = svg.append('g').attr('id', 'mainGroup').attr('transform', `translate(${margin.left}, ${margin.top})`);
+    let yAxis = d3.axisLeft(yScale).tickSize(-0);
+    g.append('g').call(yAxis);
+
+    let xAxis = d3.axisBottom(xScale);
+    g.append('g').call(xAxis).attr('transform', `translate(${0}, ${innerHeight})`);
+
+    data.forEach(item => {
+        g.append('rect').attr('width', xScale(item.value)).attr('height', yScale.bandwidth())
+        .attr('fill', '#8ac6d1').attr('y', yScale(item.name));
+    })
+
+    d3.selectAll('.tick text').attr('font-size', '2em');
+
+    g.append('text').text('this is title')
+    .attr('transform', `translate(${innerWidth / 2}, 0)`)
+    .attr('font-size', '3em')
+    .attr('text-anchor', 'middle');
+
+</script>
+</body>
+</html>
