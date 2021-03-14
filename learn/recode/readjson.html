@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@6.5.0/dist/d3.min.js"></script>
+</head>
+<body>
+<script>
+    'use strict';
+    let data;
+    d3.json('1.json')
+        .then(function (data) {
+            data.forEach(item => console.log(item));
+            data.forEach((item, index) => console.log(index, item))
+            for (const item of data) {
+                console.log(item);
+            }
+            console.log(data);
+        }).catch(function (error) {
+        console.error('error', error);
+    })
+</script>
+</body>
+</html>

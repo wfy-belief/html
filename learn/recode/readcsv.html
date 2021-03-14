@@ -3,8 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@6.5.0/dist/d3.min.js"></script>
 </head>
 <body>
-
+<script>
+    let data;
+    // d3.autoType 和 function 冲突
+    d3.dsv(",", "../d3/category-brands.csv", function (item) {
+        //console.log(item)
+        return {
+            date: new Date(item.date), // convert "Year" column to Date
+            name: item.name,
+            category: item.category,
+            value: +item.value // convert "Length" column to number
+        };
+    }).then(function (result) {
+        data = result
+        console.log(result);
+    }).catch((error) => {
+        console.error("Error loading the data");
+    });
+</script>
 </body>
 </html>
