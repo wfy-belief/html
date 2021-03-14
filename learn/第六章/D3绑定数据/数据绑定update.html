@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/d3.min.js"></script>
+	</head>
+	<body>		
+		
+		<svg width="1600" height="800" id="mainsvg" class="svgs" >
+			<circle cx="100" cy="100" r="20" id="c1" class="cir" />
+		</svg>
+		
+		<script>		
+			
+			var dataset =[{"x": 200, "y":100,"r":50},
+			              {"x": 200, "y":200,"r":100}]
+			
+			/*var S1 =d3.selectAll("#mainsvg").selectAll("circle").data(dataset)//获取update部分
+			        S1.attr("cx", function(d) { return d.x; })
+			          .attr("cy", function(d) { return d.y; })
+			          .attr("r", d=>d.r)
+			        S1.enter() //获取enter部分
+			          .append("circle")
+			          .attr("cx", function(d) { return d.x; })
+			          .attr("cy", function(d) { return d.y; })
+			          .attr("r", d=>d.r)*/
+			
+		    var S2 =d3.selectAll("#mainsvg").selectAll("circle")
+			          .data(dataset)
+			          .attr("cx", function(d) { return d.x; })
+			          .attr("cy", function(d) { return d.y; })
+			          .attr("r", d=>d.r)
+			          .enter()
+			          .append("circle")
+			          .attr("cx", function(d) { return d.x; })
+			          .attr("cy", function(d) { return d.y; })
+			          .attr("r", d=>d.r)
+			          
+			
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="d3.min.js"></script>
+	</head>
+	<body>
+		<svg width="1600" height="800" id="mainsvg" class="svgs" >
+			<rect x="10" y="10" width="60" height="20" id="c1" class="rec" />		
+		    <rect x="10" y="40" width="60" height="20" id="c2" class="rec" />		
+		    <rect x="10" y="70" width="60" height="20" id="c3" class="rec" />
+		</svg>
+		<script>
+						
+			d3.json("dataset2.json").then(jsondata=>{
+				console.log(jsondata)
+				var data2=[]				
+				
+				/*for(var i=0;i<jsondata.length;i++){
+					data2[i]= jsondata[i].value
+				}*/
+				jsondata.forEach((d,i)=>{data2[i] = d.value});
+				console.log(data2)
+				
+				d3.selectAll("#mainsvg").selectAll("rect")
+				  .data(data2)//绑定数据
+				  .attr("width",d=>d);
+				 				
+			});			
+			
+		</script>
+		
+	</body>
+</html>

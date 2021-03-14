@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/d3.min.js"></script>
+	</head>
+	<body>
+		<svg width="200" height="200" id="svg1" class="svgs" ></svg>
+		
+		<svg width="200" height="200" id="svg2" class="svgs" >
+			<circle cx="100" cy="100" r="50" id="c2" class="cir" />
+		</svg>
+		
+		<script>
+			d3.select("#svg1") //选择画布svg1添加一个矩形
+			  .append("rect")
+			  .attr("x","20")
+			  .attr("y","20")
+			  .attr("width","100")
+			  .attr("height","50");
+			  
+			 var S3 = d3.select("body") //在body中画布svg2前面添加一个画布，返回的是添加元素的选择集			 
+			            .insert("svg","#svg2")
+			            .attr("width","200")
+			            .attr("height","200")
+			             
+			   
+			    S3.append("rect")
+			      .attr("x","20")
+			      .attr("y","20")
+			      .attr("width","100")
+			      .attr("height","50");
+			  
+			  d3.select("#svg1").remove()
+			  
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/d3.min.js"></script>
+	</head>
+	<body>
+				
+		<svg width="200" height="200" id="svg1" class="svgs" >
+			<circle cx="100" cy="100" r="50" id="c1" class="cir"/>
+		</svg>
+		
+		<svg width="200" height="200" id="svg12" class="svgs">
+			<circle cx="100" cy="100" r="50" id="c2" class="cir" />
+		</svg>		
+				
+		<svg width="200" height="200" id="svg13" class="svgs">
+			<rect x="10" y="10" width="180" height="180" id="c3" class="rec" />
+		</svg>
+				
+		<svg width="200" height="200" id="svg4" class="svgs">
+			<rect x="10" y="10" width="180" height="180" id="c4" class="rec" />
+		</svg>
+		<br>
+        <script>
+        	//d3.select()函数
+        	//var S1 = d3.select("#c1");
+        	//    S1.attr("fill","red"); //设置属性
+          // document.write("中心点X坐标"+S1.attr("cx")+"<br />"+"中心点Y坐标"+S1.attr("cy") );//获取属性
+        	
+        	var s2 = d3.select("circle");//选择匹配元素的第一个元素
+        	    s2.attr("fill","blue"); //设置属性
+        	
+        	//d3.selectAll()函数
+        	var S3 = d3.selectAll(".rec");
+        	S3.attr("fill","yellow"); //设置属性
+        	
+        	var S4 =d3.selectAll("svg")
+        	  .selectAll(".cir")
+        	  .attr("stroke","red")
+        	  .attr("stroke-width","5px")
+        	  .attr("fill","purple"); 
+ 	
+        	
+        	
+        </script>
+        
+    
+	</body>
+</html>

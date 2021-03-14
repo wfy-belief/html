@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/d3.min.js"></script>
+	</head>
+	<body>
+		<p>下图是圆形
+			<span>提示：黑色的圆</span>
+		</p>		
+		
+		<svg width="200" height="200" id="svg1" class="svgs" >
+			<circle cx="100" cy="100" r="50" id="c1" class="cir"/>
+		</svg>
+		
+		<script>
+			
+			d3.select("span").attr("style","color:blue")
+			
+			//alert(d3.select("p").html())			
+			//d3.select("p").html("修改后的文字")
+			
+			//alert(d3.select("p").text())
+			//d3.select("p").text("修改后的文字")			
+			
+			//alert(d3.select("#c1").style("fill"));			
+			d3.select("#c1").style("fill","red");
+			d3.select("span").text("（提示：红色的圆）");			
+			
+		</script>
+		
+		
+	</body>
+</html>

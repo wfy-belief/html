@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="d3.min.js"></script>		
+	</head>
+	<body>
+		<svg width="1600" height="800" id="mainsvg" class="svgs" >
+			<rect x="10" y="10" width="60" height="20" id="c1" class="rec" />		
+		    <rect x="10" y="40" width="60" height="20" id="c2" class="rec" />		
+		    <rect x="10" y="70" width="60" height="20" id="c3" class="rec" />
+		</svg>
+		
+		<script>
+			
+			
+			d3.csv("csvset.csv").then(csvdata=>{
+				var data1=[]
+				/*for(var i=0;i<csvdata.length;i++){
+					data1[i]= csvdata[i].value
+				}*/
+				
+				//csvdata.forEach((d,i)=>{data1[i] = d.value});
+				
+				/*d3.selectAll("#mainsvg").selectAll("rect")
+				  .data(data1)//绑定数据
+				  .attr("width",d=>d);*/				
+			})
+			
+		</script>
+	</body>
+</html>

@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\learn\d3\brand_values.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\learn\d3\category-brands.csv">
           <value>
             <Attribute>
@@ -32,6 +39,13 @@
           </value>
         </entry>
         <entry key="\learn\d3\动态柱状图.html">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\learn\第六章\csvset.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
