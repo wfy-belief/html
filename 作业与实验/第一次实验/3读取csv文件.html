@@ -11,12 +11,7 @@
             ry: 20;
             fill: #FF9900; /* 添加填充色*/
             x: 0; /* 设置起始坐标，x是水平，(x, y) 对应矩形的左上角 */
-        }
-
-        .set-left-rect {
-            rx: 0;
-            ry: 0;
-            /*fill-opacity: 0.2;*/
+            height: 25px;
         }
     </style>
 
@@ -24,15 +19,32 @@
 <body>
 <svg id="main-svg" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
 
-    <!--设置叠加态设置左半边方角-->
-    <rect x="0" y="0" width="200" height="25"/>
-    <!--<rect class="set-left-rect" x=0 y=0 width=50 height=25 />-->
-    <!--设置叠加态设置左半边方角-->
-
-    <rect x="0" y="30" width="180" height="25"/>
-    <rect x="0" y="60" width="160" height="25"/>
-    <rect x="0" y="90" width="140" height="25"/>
-    <rect x="0" y="120" width="120" height="25"/>
 </svg>
+
+<script>
+    'use strict'; /* 严格检查模式 */
+    /* dsv 可以指定分隔符 */
+    d3.csv('data.csv', function (item) {
+        return {
+            'province': item.province,
+            'sales': +item.sales //字符数字转换为数字类型
+        };
+    }).then(function (result) {
+
+        d3.select('#main-svg')
+            .selectAll('rect')
+            .data(result)
+            .enter()
+            .append('rect')
+            .attr('width', item => item.sales)
+            .attr('y', (item, index) => index * 30)
+
+        console.log(result);
+        /* 处理完数据，开始添加元素 */
+
+    }).catch(error => {
+        console.log(error)
+    })
+</script>
 </body>
 </html>
