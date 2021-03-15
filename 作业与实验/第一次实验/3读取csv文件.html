@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/d3@6.5.0/dist/d3.min.js"></script>
     <style>
         rect {
-            /*fill-opacity: 0.7; 透明度*/
+            fill-opacity: 0.7; /*透明度*/
             rx: 10; /* rx ry 设置圆角 */
             ry: 20;
             fill: #FF9900; /* 添加填充色*/
@@ -25,20 +25,28 @@
     'use strict'; /* 严格检查模式 */
     /* dsv 可以指定分隔符 */
     d3.csv('data.csv', function (item) {
+        /* 文件名  后面可以不指定，默认也可以 指定的话，可以自定义数据格式 */
         return {
             'province': item.province,
             'sales': +item.sales //字符数字转换为数字类型
         };
     }).then(function (result) {
+        /* result 是 Array，每一个元素都是一个对象
+        {province: value, sales: value}
+        */
         /* 处理完数据，开始添加元素 */
         d3.select('#main-svg')
-            .selectAll('rect')
-            .data(result)
-            .enter()
-            .append('rect')
+            .selectAll('rect') /*选中所有 rect 标签*/
+            .data(result) /*绑定数据*/
+            .enter() /* 对于标签而言，没有rect标签，需要进入，所以是enter */
+            .append('rect') /* 为剩余的所有数据添加 rect 标签 */
+            /* 对于每一个标签的宽度，分别对应result绑定对象 每一个元素的sales
+            * 这个和python的匿名函数有点相似，遍历数据每一项，返回每一个元素的某个属性 * */
             .attr('width', item => item.sales)
+            /*可以给这个函数两个参数，元素和对应的index，index * 30，
+            代表每一个标签y坐标不同，分别为 30 60 90 120  ... * */
             .attr('y', (item, index) => index * 30);
-        /* 进阶 渐变色 鼠标触摸*/
+        /* 进阶 渐变色 鼠标触摸 可以不用看*/
         d3.selectAll('rect')
             .on("mouseover", function (item, index) {
                 d3.select(this)
@@ -51,6 +59,7 @@
                     .style("fill", "#FF9900");
             });
     }).catch(error => {
+        /*异常处理*/
         console.log(error)
     })
 </script>
