@@ -18,18 +18,12 @@
 </head>
 <body>
 <svg id="main-svg" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
-
 </svg>
 
 <script>
     'use strict'; /* 严格检查模式 */
-    /* dsv 可以指定分隔符 */
-    d3.csv('data.csv', function (item) {
-        return {
-            'province': item.province,
-            'sales': +item.sales //字符数字转换为数字类型
-        };
-    }).then(function (result) {
+    d3.json('data.json').then(function (result) {
+        console.log(result)
         /* 处理完数据，开始添加元素 */
         d3.select('#main-svg')
             .selectAll('rect')
