@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@6.5.0/dist/d3.min.js"></script>
+    <style>
+        rect {
+            /*fill-opacity: 0.7; 透明度*/
+            rx: 10; /* rx ry 设置圆角 */
+            ry: 20;
+            fill: #FF9900; /* 添加填充色*/
+            x: 0; /* 设置起始坐标，x是水平，(x, y) 对应矩形的左上角 */
+        }
+
+        .set-left-rect {
+            rx: 0;
+            ry: 0;
+            /*fill-opacity: 0.2;*/
+        }
+    </style>
+</head>
+<body>
+<svg id="main-svg" width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+
+    <!--设置叠加态设置左半边方角-->
+    <rect x=0 y=0 width=200 height=25 />
+    <!--<rect class="set-left-rect" x=0 y=0 width=50 height=25 />-->
+    <!--设置叠加态设置左半边方角-->
+
+    <rect x=0 y=30 width=180 height=25 />
+    <rect x=0 y=60 width=160 height=25 />
+    <rect x=0 y=90 width=140 height=25 />
+    <rect x=0 y=120 width=120 height=25 />
+</svg>
+
+<script>
+    'use strict'; /* 严格检查模式 */
+    const dataset = [100, 200, 50, 150, 250, 300]; /* 数据集 const let var 都可以 */
+    d3.select('#main-svg') /* 选择id为main-svg元素 */
+        .selectAll('rect') /* 选择父级元素下的全部 rect 标签*/
+        .data(dataset) /* 绑定数据集 */
+        .attr('width', item => item) /* attribute 属性，添加属性， 后面是箭头函数，因为数据集是单数据，不用特别处理，直接返回 */
+        .enter() /* 相对于标签来说，标签少，需要进入 */
+        .append('rect') /* 添加rect 矩形标签 */
+        .attr('y', 150) /* 设置y坐标 自上而下 */
+        .attr('height', 25) /* 设置高度 */
+        .attr('width', item => item) /*  */
+        .style('fill', '#8076a3') /* 添加颜色  color.wfyblog.cn */
+</script>
+</body>
+</html>
