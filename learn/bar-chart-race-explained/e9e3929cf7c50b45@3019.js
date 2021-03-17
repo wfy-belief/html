@@ -46,6 +46,7 @@ Value in $M; color indicates sector. Data: [Interbrand](https://www.interbrand.c
             const updateTicker = ticker(svg);
 
             yield svg.node();
+            console.log(svg.node())
 
             for (const keyframe of keyframes) {
                 const transition = svg.transition()

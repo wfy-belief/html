@@ -26,6 +26,7 @@
     let duration, n, names, datevalues, k, keyframes, nameframes;
     let prev, next, formatNumber, formatDate, color;
     let x, y, height, barSize, margin, width;
+
     function set_var() {
         width = 1200;
         duration = 250;
@@ -52,7 +53,7 @@
         formatNumber = d3.format(",d");
     }
 
-    function init() {
+    async function *init() {
         const svg = d3.create("svg")
             .attr("viewBox", [0, 0, width, height]);
 
@@ -61,7 +62,7 @@
         const updateLabels = labels(svg);
         const updateTicker = ticker(svg);
 
-        svg.node();
+        yield svg.node();
 
         for (const keyframe of keyframes) {
             const transition = svg.transition()
@@ -75,6 +76,9 @@
             updateBars(keyframe, transition);
             updateLabels(keyframe, transition);
             updateTicker(keyframe, transition);
+
+            svg.interrupt()
+            await transition.end();
         }
     }
 
@@ -204,8 +208,6 @@
         }
         return d => scale(d.name);
     }
-
-
 
 
 </script>

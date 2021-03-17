@@ -10,6 +10,132 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\数据 - Copy.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\数据.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\死亡比例\城市.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\死亡比例\数据.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\死亡病例\城市.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\死亡病例\数据.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\治愈人数\城市.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\治愈人数\数据.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\治愈比例\城市.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\治愈比例\数据.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\现有确诊\城市.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\现有确诊\数据.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\疑似病例\城市.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\疑似病例\数据.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\累计确诊\城市.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\django-新冠疫情项目\covapi\static\csv\累计确诊\数据.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\learn\bar-chart-race-master\brand_values.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\learn\d3\brand_values.csv">
           <value>
             <Attribute>
