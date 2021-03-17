@@ -136,6 +136,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\learn\bar-chart-race-master\examples\gdp-growth\data\data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\learn\bar-chart-race-master\examples\gdp-growth\data\metadata.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\learn\d3\brand_values.csv">
           <value>
             <Attribute>

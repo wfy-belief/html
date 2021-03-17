@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@6.5.0/dist/d3.min.js"></script>
+    <style>
+        rect {
+            fill: #f0a1a8;
+            fill-opacity: 0.6;
+        }
+        circle{
+            fill-opacity: 0.5;
+            fill: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+<script>
+    d3
+        .selectAll('body')
+        .append('svg')
+        .attr('width', 960)
+        .attr('height', 640)
+    d3 // rect
+        .select('svg')
+        .append('rect')
+        .attr('width', 100)
+        .attr('height', 200)
+        .attr('x', 0)
+        .attr('y', 0)
+    d3
+        .select('svg')
+    .append('circle')
+    .attr('cx', 300)
+    .attr('cy', 400)
+    .attr('r', 200)
+</script>
+</body>
+</html>
