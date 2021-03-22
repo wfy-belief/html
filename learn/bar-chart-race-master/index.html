@@ -291,7 +291,7 @@
                 .attr('x', d => x(d.value) + 5)
                 .attr('y', d => y(d.rank) + 5 + ((y(1) - y(0)) / 2) + 1)
                 .tween("text", function (d) {
-                    let i = d3.interpolateRound(d.lastValue, d.value);
+                    let i = d3.interpolateRound(d.value - 100, d.value);
                     return function (t) {
                         this.textContent = d3.format(',')(i(t));
                     };
@@ -309,7 +309,7 @@
 
             yearText.html(~~year);
 
-            if (year === 2010) ticker.stop();
+            if (year === 2015) ticker.stop();
             year = d3.format('.1f')((+year) + 0.1);
         }, tickDuration);
 

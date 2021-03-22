@@ -150,6 +150,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\learn\bar-chart-race-master\index.html">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\learn\d3\brand_values.csv">
           <value>
             <Attribute>
@@ -186,6 +193,20 @@
           </value>
         </entry>
         <entry key="\learn\第六章\csvset.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\作业与实验\作业\driving.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\作业与实验\作业\line.html">
           <value>
             <Attribute>
               <option name="separator" value="," />

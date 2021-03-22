@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/d3@6.5.0/dist/d3.min.js"></script>
+    <link rel="stylesheet" href="./bar.css">
+</head>
+<body>
+<script>
+    // create svg then set width and height
+    let width = 960, height = 640;
+    let svg = d3
+        .select('body').append('svg')
+        .attr('width', 960).attr('height', 640)
+    // set draw area margin
+    let margin = {
+        top: 80,
+        bottom: 80,
+        left: 0,
+        right: 0
+    }
+    // set title
+    let title = svg
+        .append('text').attr('class', 'title')
+        .attr('y', 30)
+        .html('TITLE test title')
+    // set sub title
+    svg
+        .append('text').attr('class', 'sub-title')
+        .attr('y', 55)
+        .html('I am sub title $m')
+    // caption such as title describe
+    let caption = svg.append('text')
+        .attr('class', 'caption')
+        .attr('x', width)
+        .attr('y', height - 5)
+        .style('text-anchor', 'end')
+        .html('caption test caption')
+
+    d3.dsv(',', './category-brands.csv', item => {
+        return {
+            date: item.date,
+            name: item.name,
+            category: item.category,
+            value: +item.value,
+            // h s l opacity
+            color: d3.hsl(Math.random() * 360, 0.75, 0.75, 0.5)
+        }
+    }).then(function (data) {
+        //console.log(data);
+        // select the most common of n
+        let year = 2000
+        let top_n = 12
+        let barPadding = (height - (margin.bottom + margin.top)) / (top_n * 5);
+        let yearSlice = data
+            .filter(item => item.date.slice(0, 4) === String(year))
+            .sort((a, b) => b.value - a.value)
+            .slice(0, top_n)
+
+        yearSlice.forEach((item, index) => item.rank = index)
+
+        console.log(yearSlice)
+
+        // set x and  y Scale
+        let x = d3.scaleLinear()
+            .domain([0, d3.max(yearSlice, item => item.value)])
+            .range([margin.left, width - margin.right - 65])
+        let y = d3.scaleLinear()
+            .domain([top_n, 0])
+            .range([height - margin.bottom + 75, margin.top])
+
+        let xAxis = d3.axisTop()
+            .scale(x)
+            // label
+            .ticks(width > 500 ? 5 : 2)
+            .tickSize(-(height - margin.top - margin.bottom + 75))
+            .tickFormat(item => d3.format(',')(item))
+
+        svg.append('g')
+            .attr('class', 'axis-x')
+            .attr('transform', `translate(10, ${margin.top})`)
+            .call(xAxis)
+            .selectAll('.tick line')
+            .classed('first', item => item === 0);
+
+        svg.selectAll('rect.bar')
+            .data(yearSlice, d => d.name)
+            .enter()
+            .append('rect')
+            .attr('class', 'bar')
+            .attr('x', x(0) + 11)
+            .attr('width', d => x(d.value) - x(0) - 1)
+            .attr('y', d => y(d.rank) + 5)
+            .attr('height', y(1) - y(0) - barPadding)
+            .style('fill', d => d.color);
+
+        // label
+        svg
+            .selectAll('text.label')
+            .data(yearSlice, item => item.name)
+            .enter()
+            .append('text')
+            .attr('class', 'label')
+            .attr('x', item => x(item.value) - 5)
+            .attr('y', item => y(item.rank) + 5 + (y(1) - y(0)) / 2)
+            .style('text-anchor', 'end')
+            .html(item => item.name)
+
+        // label value
+        svg
+            .selectAll('text.label-value')
+            .data(yearSlice, item => item.name)
+            .enter()
+            .append('text')
+            .attr('class', 'label-value')
+            .attr('x', item => x(item.value) + 15)
+            .attr('y', item => y(item.rank) + 5 + (y(1) - y(0)) / 2)
+            //.html(item => item.value)
+            .text(item => item.value);
+
+        let yearText = svg.append('text')
+            .attr('class', 'yearText')
+            .attr('x', width - margin.right)
+            .attr('y', height - 25)
+            .style('text-anchor', 'end')
+            .html(~~year)
+        //.call(halo, 10);
+        // 动画 interval 间隔
+        let animationDuration = 1500
+        let animation = d3.interval(detail => {
+            console.log(detail)
+
+            year = Number(year)
+            yearSlice = data.filter(item => item.date.slice(0, 4) === String(year))
+                .sort((a, b) => b.value - a.value)
+                .slice(0, top_n)
+            yearSlice.forEach((item, index) => item.rank = index)
+            x.domain([0, d3.max(yearSlice, item => item.value)]);
+
+            svg.selectAll('.axis-x')
+                .transition()
+                .duration(animationDuration)
+                .ease(d3.easeLinear)
+                .call(xAxis);
+
+            let bars = svg.selectAll('.bar').data(yearSlice, item => item.name)
+
+            bars
+                .enter()
+                .append('rect')
+                .attr('class', d => `bar ${d.name.replace(/\s/g, '_')}`)
+                .attr('x', x(0) + 11)
+                .attr('width', item => x(item.value) - x(0) - 1)
+                .attr('y', () => y(top_n + 1) + 5)
+                .attr('height', y(1) - y(0) - barPadding)
+                .style('fill', item => item.color)
+                .transition()
+                .duration(animationDuration)
+                .ease(d3.easeLinear)
+                .attr('y', item => y(item.rank) + 5)
+
+            bars
+                .transition()
+                .duration(animationDuration)
+                .ease(d3.easeLinear)
+                .attr('width', item => x(item.value) - x(0) - 1)
+                .attr('y', item => y(item.rank) + 5)
+
+            bars
+                .exit()
+                .transition()
+                .duration(animationDuration)
+                .ease(d3.easeLinear)
+                .attr('width', d => x(d.value) - x(0) - 1)
+                .attr('y', d => y(top_n + 1) + 5)
+                .remove()
+
+            let labels = svg.selectAll('.label')
+                .data(yearSlice, d => d.name);
+
+            labels
+                .enter()
+                .append('text')
+                .attr('class', 'label')
+                .attr('x', d => x(d.value) - 8 + 10)
+                .attr('y', d => y(top_n + 1) + 5 + ((y(1) - y(0)) / 2))
+                .style('text-anchor', 'end')
+                .html(d => d.name)
+                .transition()
+                .duration(animationDuration)
+                .ease(d3.easeLinear)
+                .attr('y', d => y(d.rank) + 5 + ((y(1) - y(0)) / 2) + 1);
+
+
+            labels
+                .transition()
+                .duration(animationDuration)
+                .ease(d3.easeLinear)
+                .attr('x', d => x(d.value) - 8 + 10)
+                .attr('y', d => y(d.rank) + 5 + ((y(1) - y(0)) / 2) + 1);
+
+            labels
+                .exit()
+                .transition()
+                .duration(animationDuration)
+                .ease(d3.easeLinear)
+                .attr('x', d => x(d.value) - 8 + 10)
+                .attr('y', d => y(top_n + 1) + 5)
+                .remove();
+
+            let label_value = svg.selectAll('.label-value').data(yearSlice, d => d.name);
+
+
+            label_value
+                .enter()
+                .append('text')
+                .attr('class', 'label-value')
+                .attr('x', d => x(d.value) + 5 + 10)
+                .attr('y', d => y(top_n + 1) + 5)
+                .text(d => d3.format(',.0f')(d.value - 100))
+                .transition()
+                .duration(animationDuration)
+                .ease(d3.easeLinear)
+                .attr('y', d => y(d.rank) + 5 + ((y(1) - y(0)) / 2) + 1);
+
+            label_value
+                .transition()
+                .duration(animationDuration)
+                .ease(d3.easeLinear)
+                .attr('x', d => x(d.value) + 5 + 10)
+                .attr('y', d => y(d.rank) + 5 + ((y(1) - y(0)) / 2) + 1)
+                .tween("text", function (d) {
+                    let i = d3.interpolateRound(d.value - 100, d.value);
+                    return function (t) {
+                        this.textContent = d3.format(',')(i(t));
+                    };
+                });
+
+
+            label_value
+                .exit()
+                .transition()
+                .duration(animationDuration)
+                .ease(d3.easeLinear)
+                .attr('x', d => x(d.value) + 5 + 10)
+                .attr('y', d => y(top_n + 1) + 5)
+                .remove();
+            yearText.html(~~year);
+            if (year === 2012) animation.stop();
+            year++;
+        }, animationDuration)
+
+
+
+
+    }).catch(error => console.log(error))
+
+</script>
+</body>
+</html>
